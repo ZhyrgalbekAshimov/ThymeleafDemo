@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+</div>
+    <h2 th:if="${#lists.size(users) == 0}">No users yet!</h2>
+    <div th:if="${#lists.size(users) != 0}">
+        <h2>All users:</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <tr th:each="user : ${users}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+                <td><a th:href="@{/edit/{id}(id=${user.id})}"  class="editBtn">Edit</a></td>
+                <td><a th:href="@{/delete/{id}(id=${user.id})}" class="deleteBtn">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <style type="text/css">
+            body {
+                margin: 20px;
+                padding: 0;
+            }
+
+            table {
+                width: 50%; /*Ширина таблицы*/
+                margin-bottom: 18px; /*Отступ снизу от таблицы*/
+                padding: 0; /*Отступы внутри таблицы*/
+                font-size: 14px; /*Размер шрифта*/
+                border: 1px solid #dddddd; /*Граница таблицы*/
+                border-spacing: 0; /*Отступы между границами ячеек*/
+                border-collapse: separate; /*Границы ячеек не склеиваются*/
+                -webkit-border-radius: 6px; /*Радиус скругления углов у таблицы Safari, Chrome*/
+                -moz-border-radius: 6px; /*Радиус скругления углов у таблицы Mozilla*/
+                border-radius: 6px; /*Радиус скругления углов у таблицы*/
+                color: #666666; /*Цвет текста в таблице*/
+                font-family: Arial,serif; /*Семейство шрифтов*/
+                text-align: center; /*Выравнивание текста по левому краю*/
+                vertical-align: middle
+
+
+            }
+
+            table th, table td {
+                padding: 10px 10px 9px; /*Отступы внутри ячеек*/
+                line-height: 11px; /*Межстрочный интервал*/
+            }
+
+            table th {
+                padding-top: 19px; /*Отступы внутри ячеек*/
+                font-weight: bold; /*Установка жирного начертания шрифта*/
+                vertical-align: middle; /*Выравнивание по вертикали. Текст находится по середине*/
+                color: black; /*Черный цвет в ячейках заголовков таблицы*/
+                background: #EDEDED;
+
+            }
+
+            table td {
+                vertical-align: middle; /*Выравнивание содержимого ячейки по верхнему краю*/
+                border-top: 1px solid #ddd; /*Верхняя граница ячейки*/
+            }
+
+            table th+th,table td+td,table th+td {
+                border-left: 1px solid #ddd; /*Стиль для левой границы между двумя ячейками*/
+            }
+
+            table thead tr:first-child th:first-child, /*Первая строка первая ячейка в заголовке таблицы*/
+            table tbody tr:first-child td:first-child /*Первая строка первая ячейка в теле таблицы*/{
+                -webkit-border-radius: 5px 0 0 0;
+                -moz-border-radius: 5px 0 0 0;
+                border-radius: 5px 0 0 0;
+            }
+
+            table thead tr:first-child th:last-child, /*Первая строка последняя ячейка в заголовке таблицы*/
+            table tbody tr:first-child td:last-child /*Первая строка последняя ячейка в теле таблицы*/ {
+                -webkit-border-radius: 0 5px 0 0;
+                -moz-border-radius: 0 5px 0 0;
+                border-radius: 0 5px 0 0;
+
+            }
+
+            table tbody tr:last-child td:first-child  /*Последняя строка первая ячейка в теле таблицы*/ {
+                -webkit-border-radius: 0 0 0 5px;
+                -moz-border-radius: 0 0 0 5px;
+                border-radius: 0 0 0 5px;
+
+            }
+
+            table tbody tr:last-child td:last-child  /*Последняя строка последняя ячейка в теле таблицы*/{
+                -webkit-border-radius: 0 0 5px 0;
+                -moz-border-radius: 0 0 5px 0;
+                border-radius: 0 0 5px 0;
+            }
+
+            table tr:hover {
+                background-color: #f2f2f2; /*Цвет строки при наведении курсора мыши*/
+            }
+
+
+            a.editBtn{
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+                -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+                color: #fff;
+                display:block;
+                width:50px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 15px;
+                padding: 8px 16px;
+                margin: 0 auto;
+                text-decoration: none;
+                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+                -webkit-transition: background-color 0.1s linear;
+                -moz-transition: background-color 0.1s linear;
+                -o-transition: background-color 0.1s linear;
+                transition: background-color 0.1s linear;
+            }
+            a.editBtn {
+                background-color: rgb(255, 186, 0);
+                border: 0 solid rgb( 33, 126, 74 );
+            }
+
+            a.editBtn:hover {
+                background-color: rgb(255, 216, 0);
+            }
+
+
+
+            a.deleteBtn{
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+                -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+                color: #fff;
+                display:block;
+                width:50px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 15px;
+                padding: 8px 16px;
+                margin: 0 auto;
+                text-decoration: none;
+                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+                -webkit-transition: background-color 0.1s linear;
+                -moz-transition: background-color 0.1s linear;
+                -o-transition: background-color 0.1s linear;
+                transition: background-color 0.1s linear;
+            }
+            a.deleteBtn {
+                background-color: rgb(185, 87, 87);
+                border: 0 solid rgb( 33, 126, 74 );
+            }
+
+            a.deleteBtn:hover {
+                background-color: rgb(253, 125, 139);
+            }
+
+            a.applyBtn {
+                font-weight: 700;
+                color: white;
+                text-decoration: none;
+                padding: .8em 1em calc(.8em + 3px);
+                border-radius: 3px;
+                background: rgb(64,199,129);
+                box-shadow: 0 -3px rgb(53,167,110) inset;
+                transition: 0.25s;
+            }
+            a.applyBtn:hover { background: rgb(53, 167, 110); }
+            a.applyBtn:active {
+                background: rgb(33,147,90);
+                box-shadow: 0 3px rgb(33,147,90) inset;
+            }
+        </style>
+
+    </div>
+<p><a href="/signup" class = "applyBtn">Add a new user</a></p>
+<style type="text/css">
+    a.applyBtn {
+        font-weight: 800;
+        color: white;
+        text-decoration: none;
+        padding: .8em 1em calc(.8em + 3px);
+        border-radius: 3px;
+        background: rgb(64,199,129);
+        box-shadow: 0 -3px rgb(53,167,110) inset;
+        transition: 0.25s;
+    }
+    a.applyBtn:hover { background: rgb(53, 167, 110); }
+    a.applyBtn:active {
+        background: rgb(33,147,90);
+        box-shadow: 0 3px rgb(33,147,90) inset;
+    }
+</style>
+</html>
